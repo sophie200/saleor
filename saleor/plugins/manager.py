@@ -525,7 +525,10 @@ class PluginsManager(PaymentInterface):
         self, gateway: str, payment_information: "PaymentData"
     ) -> "GatewayResponse":
         method_name = "process_payment"
-        return self.__run_payment_method(gateway, method_name, payment_information)
+        value = None
+        return self.__run_method_on_plugins(
+            method_name, value, payment_information=payment_information
+        )
 
     def token_is_required_as_payment_input(self, gateway) -> bool:
         method_name = "token_is_required_as_payment_input"

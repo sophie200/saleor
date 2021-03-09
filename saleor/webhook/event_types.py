@@ -36,6 +36,8 @@ class WebhookEventType:
     PAGE_UPDATED = "page_updated"
     PAGE_DELETED = "page_deleted"
 
+    PAYMENT_PROCESS = "payment_process"
+
     DISPLAY_LABELS = {
         ANY: "Any events",
         ORDER_CREATED: "Order created",
@@ -58,6 +60,7 @@ class WebhookEventType:
         PAGE_CREATED: "Page Created",
         PAGE_UPDATED: "Page Updated",
         PAGE_DELETED: "Page Deleted",
+        PAYMENT_PROCESS: "Process payment",
     }
 
     CHOICES = [
@@ -82,6 +85,7 @@ class WebhookEventType:
         (PAGE_CREATED, DISPLAY_LABELS[PAGE_CREATED]),
         (PAGE_UPDATED, DISPLAY_LABELS[PAGE_UPDATED]),
         (PAGE_DELETED, DISPLAY_LABELS[PAGE_DELETED]),
+        (PAYMENT_PROCESS, DISPLAY_LABELS[PAYMENT_PROCESS]),
     ]
 
     PERMISSIONS = {

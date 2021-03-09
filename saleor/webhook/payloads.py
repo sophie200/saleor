@@ -1,17 +1,17 @@
 import json
-from typing import Iterable, Optional
+from dataclasses import asdict
+from typing import TYPE_CHECKING, Iterable, Optional
 
 import graphene
 from django.db.models import QuerySet
 
-from ..account.models import User
 from ..checkout.models import Checkout
 from ..core.utils.anonymization import (
     anonymize_checkout,
     anonymize_order,
     generate_fake_user,
 )
-from ..invoice.models import Invoice
+from ..core.utils.json_serializer import CustomJsonEncoder
 from ..order import FulfillmentStatus, OrderStatus
 from ..order.models import Fulfillment, FulfillmentLine, Order, OrderLine
 from ..order.utils import get_order_country
@@ -22,6 +22,12 @@ from ..warehouse.models import Warehouse
 from .event_types import WebhookEventType
 from .payload_serializers import PayloadSerializer
 from .serializers import serialize_checkout_lines
+
+if TYPE_CHECKING:
+    from ..account.models import User
+    from ..invoice.models import Invoice
+    from ..payment.interface import PaymentData
+
 
 ADDRESS_FIELDS = (
     "first_name",
@@ -335,6 +341,11 @@ def generate_page_payload(page: Page):
         fields=page_fields,
     )
     return page_payload
+
+
+def generate_payment_payload(payment_data: "PaymentData"):
+    data = asdict(payment_data)
+    return json.dumps(data, cls=CustomJsonEncoder)
 
 
 def _get_sample_object(qs: QuerySet):
