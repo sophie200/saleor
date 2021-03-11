@@ -20,6 +20,7 @@ All notable, unreleased changes to this project will be documented in this file.
 - Fix resolver by id and slug for product and product variant - #6985 by @d-wysocki
 - Add optional support for reporting resource limits via a stub field in `shop` - #6967 by @NyanKiyoshi
 
+- Remove redundant spans - #6994 by @fowczarek
 
 ### Breaking
 - Multichannel MVP: Multicurrency - #6242 by @fowczarek @d-wysocki
